@@ -16,14 +16,17 @@ public class MainMenu {
 
  public static void RunMenu() throws IOException, ParseException {
     while(true) {
-
+        System.out.println("*************************" );
         System.out.println("Event Management System");
+        System.out.println("*************************" );
+        System.out.println();
         System.out.println("1. View all events");
         System.out.println("2. View event by id");
         System.out.println("3. Add event");
         System.out.println("4. Update event");
         System.out.println("5. Delete event");
         System.out.println("6. Exit");
+        System.out.println();
 
         int choice = getIntInput("Enter your choice: ");
 
