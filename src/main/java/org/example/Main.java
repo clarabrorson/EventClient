@@ -4,14 +4,16 @@ import org.apache.hc.core5.http.ParseException;
 import org.example.menu.MainMenu;
 
 import java.io.IOException;
-
-import static org.example.service.EventService.getAllEvents;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
 
-        MainMenu.RunMenu();
+        Logger.getLogger("org.mongodb.driver")
+                .setLevel(Level.SEVERE);
 
+        MainMenu.RunMenu();
 
     }
 }

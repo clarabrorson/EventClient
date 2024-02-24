@@ -4,12 +4,16 @@ import org.apache.hc.core5.http.ParseException;
 import org.example.entity.Event;
 
 import java.io.IOException;
+import java.util.List;
 
 public class EventServiceHandler {
 
+
     public static void viewAllEvents() throws IOException, ParseException {
-        String events = EventService.getAllEvents();
-        System.out.println(events);
+        List<Event> events = EventService.getAllEvents();
+        for (Event event : events) {
+            System.out.println(event);
+        }
     }
 
     public static void viewEventById(Long id) throws IOException, ParseException {
@@ -27,8 +31,7 @@ public class EventServiceHandler {
 
     }
 
-    public static void deleteEventById(Long id) throws IOException, ParseException {
-        String response = EventService.deleteEventById(id);
-        System.out.println(response);
+    public static void deleteEventById(String id) throws IOException, ParseException {
+        EventService.deleteEventById(id);
     }
 }

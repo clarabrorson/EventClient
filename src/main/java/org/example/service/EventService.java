@@ -1,6 +1,7 @@
 package org.example.service;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.classic.methods.*;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -14,15 +15,17 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.example.entity.Event;
 
 import java.io.IOException;
+import java.util.List;
 
 public class EventService {
 
     private static final CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String getAllEvents() throws IOException, ParseException {
+    public static List<Event> getAllEvents() throws IOException, ParseException {
         HttpGet request = new HttpGet("http://localhost:8080/events");
-        return executeRequest(request);
+        String jsonResponse = executeRequest(request);
+        return objectMapper.readValue(jsonResponse, new TypeReference<List<Event>>(){});
     }
 
     public static String getEventById(Long id) throws IOException, ParseException {
@@ -44,7 +47,7 @@ public class EventService {
         return executeRequest(request);
     }
 
-    public static String deleteEventById(Long id) throws IOException, ParseException {
+    public static String deleteEventById(String id) throws IOException, ParseException {
         HttpDelete request = new HttpDelete("http://localhost:8080/events/" + id);
         return executeRequest(request);
     }

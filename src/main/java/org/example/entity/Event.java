@@ -16,4 +16,10 @@ public class Event {
     private String location;
     private String organizer;
     private String category;
+
+    @Override
+    public String toString() {
+        return "Event ID: " + eventId + ", Event Name: " + eventName + ", Location: " + location + ", Date: " + eventDate;
+    }
+
 }
