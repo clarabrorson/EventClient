@@ -1,5 +1,8 @@
 package org.example.menu;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.hc.core5.http.ParseException;
 import org.example.entity.Event;
 import org.example.service.EventServiceHandler;
@@ -53,7 +56,6 @@ public class MainMenu {
 
         }
     }
-
     private static Event createEvent() {
         System.out.println("Enter the following details to create a new event:");
         String eventName = InputHandler.getStringInput("Event Name: ");
@@ -62,11 +64,11 @@ public class MainMenu {
         String location = InputHandler.getStringInput("Location: ");
         String organizer = InputHandler.getStringInput("Organizer: ");
         String category = InputHandler.getStringInput("Category: ");
-        return new Event(0, eventName, eventDescription, eventDate, location, organizer, category);
+        return new Event("0", eventName, eventDescription, eventDate, location, organizer, category);
     }
 
     private static Event updateEvent() {
-        Long id = (long) InputHandler.getIntInput("Enter the id of the event to update: ");
+        String id = InputHandler.getStringInput("Enter the id of the event to update: ");
         System.out.println("Enter the new details for the event:");
         String eventName = InputHandler.getStringInput("Event Name: ");
         String eventDescription = InputHandler.getStringInput("Event Description: ");
@@ -74,8 +76,17 @@ public class MainMenu {
         String location = InputHandler.getStringInput("Location: ");
         String organizer = InputHandler.getStringInput("Organizer: ");
         String category = InputHandler.getStringInput("Category: ");
-        return new Event(id, eventName, eventDescription, eventDate, location, organizer, category);
+        Event event = new Event(id, eventName, eventDescription, eventDate, location, organizer, category);
+        try {
+            EventServiceHandler.updateEvent(event);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return event;
     }
+
+
+
 
 }
 

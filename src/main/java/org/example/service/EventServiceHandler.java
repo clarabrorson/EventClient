@@ -23,8 +23,8 @@ public class EventServiceHandler {
     }
 
     public static void updateEvent(Event event) throws IOException, ParseException {
-        String response = EventService.updateEvent(event);
-        System.out.println(response);
+        EventService.updateEvent(event);
+
     }
 
     public static void deleteEventById(Long id) throws IOException, ParseException {
