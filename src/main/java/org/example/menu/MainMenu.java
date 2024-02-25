@@ -56,6 +56,11 @@ public class MainMenu {
         }
     }
  }
+
+    public static void viewEventById() throws IOException, ParseException {
+        String id = InputHandler.getStringInput("Enter event id: ");
+        EventServiceHandler.viewEventById(id);
+    }
 private static Event createEvent() {
     System.out.println("Enter the following details to create a new event:");
     String eventName = InputHandler.getStringInput("Event Name: ");
@@ -80,7 +85,15 @@ private static Event createEvent() {
         System.out.println("Enter the new details for the event:");
         String eventName = InputHandler.getStringInput("Event Name: ");
         String eventDescription = InputHandler.getStringInput("Event Description: ");
-        String eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
+        String eventDate = "";
+        while (true) {
+            eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
+            if (eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                break;
+            } else {
+                System.out.println("Invalid date format. Please enter in YYYY-MM-DD format.");
+            }
+        }
         String location = InputHandler.getStringInput("Location: ");
         String organizer = InputHandler.getStringInput("Organizer: ");
         String category = InputHandler.getStringInput("Category: ");

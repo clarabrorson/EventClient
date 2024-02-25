@@ -54,7 +54,6 @@ public class EventService {
 
     private static String executeRequest(HttpUriRequestBase request) throws IOException, ParseException {
         CloseableHttpResponse response = httpClient.execute(request);
-        System.out.println("HTTP response status code: " + response.getCode());
         if (response.getCode() != 200) {
             System.out.println("Error occurred");
             return null;

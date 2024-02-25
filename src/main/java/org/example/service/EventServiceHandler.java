@@ -1,5 +1,6 @@
 package org.example.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.core5.http.ParseException;
 import org.example.entity.Event;
 import org.example.util.InputHandler;
@@ -36,34 +37,18 @@ public class EventServiceHandler {
     }
 
     public static void viewEventById(String id) throws IOException, ParseException {
-        Long eventId = Long.parseLong(id);
-        String event = EventService.getEventById(eventId);
-        System.out.println(event);
-    }
-/*
-    public static void deleteEventById(String id) throws IOException, ParseException {
-        while (true) {
-            try {
-                id = InputHandler.getStringInput("Enter event id: ");
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid id.");
-            }
-        }
-        EventService.deleteEventById(id);
-    }
-
-
-
-    public static void deleteEventById(String id) throws IOException, ParseException {
         try {
-            EventService.deleteEventById(id);
+            String jsonResponse = EventService.getEventById(Long.parseLong(id));
+            if (jsonResponse == null || jsonResponse.contains("Error occurred")) {
+                System.out.println("Event with id " + id + " not found.");
+            } else {
+                Event event = new ObjectMapper().readValue(jsonResponse, Event.class);
+                System.out.println(event);
+            }
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Please enter a valid id.");
         }
     }
-
- */
 
     public static void deleteEventById(String id) throws IOException, ParseException {
         try {
