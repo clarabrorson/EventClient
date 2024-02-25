@@ -3,7 +3,11 @@ package org.example.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * Event class
+ * This class is used to create an event object
+ * The object represent and event that is used in the event management system in the webserver.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -17,6 +17,12 @@ import org.example.entity.Event;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Service class to handle all the HTTP requests to the server
+ * This class uses the Apache HttpClient library to make the requests
+ * The requests are made to the server running on localhost:8080
+ * The method executeRequest is used to execute the request and return the response
+ */
 public class EventService {
 
     private static final CloseableHttpClient httpClient = HttpClients.createDefault();

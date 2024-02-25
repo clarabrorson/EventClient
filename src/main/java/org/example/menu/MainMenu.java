@@ -6,8 +6,16 @@ import org.example.service.EventServiceHandler;
 import org.example.util.InputHandler;
 import java.io.IOException;
 
+import static org.example.util.InputHandler.getValidatedInput;
 
-
+/**
+ * Main menu class to display the menu and handle user input
+ * It contains methods to view all events, view event by id, add event, update event, delete event and exit the program
+ * It uses the EventServiceHandler class to handle the business logic
+ * It uses the InputHandler class to handle user input
+ * The method getValidatedInput is used to get validated input from the user, it prevents the user from entering empty strings.
+ * The matching regex pattern is used to validate the date format.
+ */
 public class MainMenu {
 
  public static void RunMenu() throws IOException, ParseException {
@@ -57,34 +65,16 @@ public class MainMenu {
     }
  }
 
+
+
     public static void viewEventById() throws IOException, ParseException {
         String id = InputHandler.getStringInput("Enter event id: ");
         EventServiceHandler.viewEventById(id);
     }
-private static Event createEvent() {
-    System.out.println("Enter the following details to create a new event:");
-    String eventName = InputHandler.getStringInput("Event Name: ");
-    String eventDescription = InputHandler.getStringInput("Event Description: ");
-    String eventDate = "";
-    while (true) {
-        eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
-        if (eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            break;
-        } else {
-            System.out.println("Invalid date format. Please enter in YYYY-MM-DD format.");
-        }
-    }
-    String location = InputHandler.getStringInput("Location: ");
-    String organizer = InputHandler.getStringInput("Organizer: ");
-    String category = InputHandler.getStringInput("Category: ");
-    return new Event("0", eventName, eventDescription, eventDate, location, organizer, category);
-}
-    private static Event updateEvent() throws IOException, ParseException {
-        EventServiceHandler.viewAllEvents();
-        String id = InputHandler.getStringInput("Enter the id of the event to update: ");
-        System.out.println("Enter the new details for the event:");
-        String eventName = InputHandler.getStringInput("Event Name: ");
-        String eventDescription = InputHandler.getStringInput("Event Description: ");
+    private static Event createEvent() {
+        System.out.println("Enter the following details to create a new event:");
+        String eventName = getValidatedInput("Event Name: ", "Event Name cannot be empty.");
+        String eventDescription = getValidatedInput("Event Description: ", "Event Description cannot be empty.");
         String eventDate = "";
         while (true) {
             eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
@@ -94,9 +84,30 @@ private static Event createEvent() {
                 System.out.println("Invalid date format. Please enter in YYYY-MM-DD format.");
             }
         }
-        String location = InputHandler.getStringInput("Location: ");
-        String organizer = InputHandler.getStringInput("Organizer: ");
-        String category = InputHandler.getStringInput("Category: ");
+        String location = getValidatedInput("Location: ", "Location cannot be empty.");
+        String organizer = getValidatedInput("Organizer: ", "Organizer cannot be empty.");
+        String category = getValidatedInput("Category: ", "Category cannot be empty.");
+        return new Event("0", eventName, eventDescription, eventDate, location, organizer, category);
+    }
+
+    private static Event updateEvent() throws IOException, ParseException {
+        EventServiceHandler.viewAllEvents();
+        String id = InputHandler.getStringInput("Enter the id of the event to update: ");
+        System.out.println("Enter the new details for the event:");
+        String eventName = getValidatedInput("Event Name: ", "Event Name cannot be empty.");
+        String eventDescription = getValidatedInput("Event Description: ", "Event Description cannot be empty.");
+        String eventDate = "";
+        while (true) {
+            eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
+            if (eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                break;
+            } else {
+                System.out.println("Invalid date format. Please enter in YYYY-MM-DD format.");
+            }
+        }
+        String location = getValidatedInput("Location: ", "Location cannot be empty.");
+        String organizer = getValidatedInput("Organizer: ", "Organizer cannot be empty.");
+        String category = getValidatedInput("Category: ", "Category cannot be empty.");
         Event event = new Event(id, eventName, eventDescription, eventDate, location, organizer, category);
         EventServiceHandler.updateEvent(event);
         return event;

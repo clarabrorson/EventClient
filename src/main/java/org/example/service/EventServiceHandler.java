@@ -3,11 +3,15 @@ package org.example.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.core5.http.ParseException;
 import org.example.entity.Event;
-import org.example.util.InputHandler;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class is a handler for the EventService class.
+ * It provides methods to interact with the EventService class.
+ * It acts like a middleman between the EventService class and the MainMenu class.
+ */
 public class EventServiceHandler {
 
 
