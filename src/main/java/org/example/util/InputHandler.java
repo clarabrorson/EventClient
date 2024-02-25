@@ -3,18 +3,26 @@ package org.example.util;
 import java.util.Scanner;
 
 public class InputHandler {
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int getIntInput(String prompt) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(prompt);
-        int input = scan.nextInt();
-        return input;
+        int number = 0;
+        while (true) {
+            try {
+                System.out.print(prompt);
+                number = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+        }
+        return number;
     }
 
     public static String getStringInput(String prompt) {
-        Scanner scan = new Scanner(System.in);
         System.out.print(prompt);
-        String input = scan.nextLine();
-        return input;
+        return scanner.nextLine();
     }
 }
+
+

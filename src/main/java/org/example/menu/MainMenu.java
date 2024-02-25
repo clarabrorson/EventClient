@@ -1,16 +1,12 @@
 package org.example.menu;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.apache.hc.core5.http.ParseException;
 import org.example.entity.Event;
 import org.example.service.EventServiceHandler;
 import org.example.util.InputHandler;
-
 import java.io.IOException;
 
-import static org.example.util.InputHandler.getIntInput;
+
 
 public class MainMenu {
 
@@ -28,46 +24,56 @@ public class MainMenu {
         System.out.println("6. Exit");
         System.out.println();
 
-        int choice = getIntInput("Enter your choice: ");
+        try {
+            int choice = InputHandler.getIntInput("Enter your choice: ");
 
-        switch (choice) {
-            case 1:
-                EventServiceHandler.viewAllEvents();
-                break;
-            case 2:
-                Long id = (long) InputHandler.getIntInput("Enter event id: ");
-                EventServiceHandler.viewEventById(id);
-                break;
-            case 3:
-                Event newEvent = createEvent();
-                EventServiceHandler.addEvent(newEvent);
-                break;
-            case 4:
-                Event updatedEvent = updateEvent();
-                EventServiceHandler.updateEvent(updatedEvent);
-                break;
-            case 5:
-                deleteEventById();
-                break;
-            case 6:
-                System.exit(0);
-            default:
-                System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+            switch (choice) {
+                case 1:
+                    EventServiceHandler.viewAllEvents();
+                    break;
+                case 2:
+                    String id = InputHandler.getStringInput("Enter event id: ");
+                    EventServiceHandler.viewEventById(id);
+                    break;
+                case 3:
+                    Event newEvent = createEvent();
+                    EventServiceHandler.addEvent(newEvent);
+                    break;
+                case 4:
+                    Event updatedEvent = updateEvent();
+                    EventServiceHandler.updateEvent(updatedEvent);
+                    break;
+                case 5:
+                    deleteEventById();
+                    break;
+                case 6:
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
         }
     }
-}
-
-    private static Event createEvent() {
-        System.out.println("Enter the following details to create a new event:");
-        String eventName = InputHandler.getStringInput("Event Name: ");
-        String eventDescription = InputHandler.getStringInput("Event Description: ");
-        String eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
-        String location = InputHandler.getStringInput("Location: ");
-        String organizer = InputHandler.getStringInput("Organizer: ");
-        String category = InputHandler.getStringInput("Category: ");
-        return new Event("0", eventName, eventDescription, eventDate, location, organizer, category);
+ }
+private static Event createEvent() {
+    System.out.println("Enter the following details to create a new event:");
+    String eventName = InputHandler.getStringInput("Event Name: ");
+    String eventDescription = InputHandler.getStringInput("Event Description: ");
+    String eventDate = "";
+    while (true) {
+        eventDate = InputHandler.getStringInput("Event Date (YYYY-MM-DD): ");
+        if (eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            break;
+        } else {
+            System.out.println("Invalid date format. Please enter in YYYY-MM-DD format.");
+        }
     }
-
+    String location = InputHandler.getStringInput("Location: ");
+    String organizer = InputHandler.getStringInput("Organizer: ");
+    String category = InputHandler.getStringInput("Category: ");
+    return new Event("0", eventName, eventDescription, eventDate, location, organizer, category);
+}
     private static Event updateEvent() throws IOException, ParseException {
         EventServiceHandler.viewAllEvents();
         String id = InputHandler.getStringInput("Enter the id of the event to update: ");
@@ -85,12 +91,9 @@ public class MainMenu {
 
     public static void deleteEventById() throws IOException, ParseException {
         EventServiceHandler.viewAllEvents();
-        String id = InputHandler.getStringInput("Enter the id of the event to delete: ");
+        String id = InputHandler.getStringInput("Enter event id: ");
         EventServiceHandler.deleteEventById(id);
     }
-
-
-
 
 }
 
