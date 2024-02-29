@@ -4,7 +4,7 @@ This is a Maven-based Java console application that acts as a client to the Even
 This project is part of the CI/CD pipeline and is used to demonstrate the deployment of a web service application to AWS.
 The project is hosted on AWS for a short period of time and contains functionality to respond to various requests.
 
-UPDATE: The Web Service for this project is no longer hosted on AWS.
+### UPDATE: The Web Service for this project is no longer hosted on AWS.
 
 ## Features
 
