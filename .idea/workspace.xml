@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc06be9c-e38c-4d7b-9e4c-006d362cb426" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entity/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entity/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/EventService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/EventServiceHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/EventServiceHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/util/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/util/InputHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
